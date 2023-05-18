@@ -3,7 +3,8 @@ const app = Vue.createApp({
         return {
             myName: "Jakub",
             myAge: 27,
-            myImage: "https://en.wikipedia.org/wiki/Erling_Haaland#/media/File:Erling_Haaland_2023_(cropped-v2).jpg"
+            myImage:
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Man_Daeng_Waterfall.jpg/640px-Man_Daeng_Waterfall.jpg",
         };
     },
     methods: {
@@ -13,8 +14,8 @@ const app = Vue.createApp({
         myFavouriteNumber() {
             const randomNumber = Math.random();
             return randomNumber;
-        }
-    }
+        },
+    },
 });
 
 app.mount("#assignment");
