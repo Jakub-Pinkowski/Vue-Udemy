@@ -3,24 +3,26 @@ const app = Vue.createApp({
         return {
             counter: 0,
             name: "",
+            lastName: "",
         };
     },
+    watch: {
+        counter(value) {
+            if (value > 50) {
+                this.counter = 0;
+            }
+        }
+    },
     computed: {
-        fullName() {
+        fullname() {
             console.log("Running again...");
-            if (this.name === "") {
+            if (this.name === "" || this.lastName === "") {
                 return "";
             }
-            return this.name + " " + "Khan";
+            return this.name + " " + this.lastName;
         },
     },
     methods: {
-        outputFullName() {
-            if (this.name === "") {
-                return "";
-            }
-            return this.name + " " + "Khan";
-        },
         setName(event) {
             this.name = event.target.value
         },
