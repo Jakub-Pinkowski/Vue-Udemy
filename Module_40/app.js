@@ -11,7 +11,7 @@ const app = Vue.createApp({
         },
         removeGoal(index) {
             this.goals.splice(index, 1);
-        }
+        },
     },
 });
 
