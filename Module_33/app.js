@@ -20,7 +20,7 @@ const app = Vue.createApp({
             } else if (box === "C") {
                 this.boxCSelected = !this.boxCSelected;
             }
-            Ż;
+            ;
         },
     },
 });
