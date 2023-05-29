@@ -2,11 +2,11 @@
     <form @submit.prevent="submitData">
         <div>
             <label for="name">Name</label>
-            <input v-model="enteredName" type="text" required>
+            <input v-model="enteredName" type="text" required placeholder="Your name">
         </div>
         <div>
             <label for="age">Age</label>
-            <input v-model="enteredAge" type="text" required>
+            <input v-model="enteredAge" type="text" required placeholder="Your age">
         </div>
         <div>
             <button>Submit</button>
@@ -18,8 +18,7 @@
 
 export default {
     emits: [
-        'name',
-        'age'
+        'update-data'
     ],
     data() {
         return {
@@ -29,8 +28,7 @@ export default {
     },
     methods: {
         submitData() {
-            this.$emit('name', this.enteredName);
-            this.$emit('age', +this.enteredAge || '');
+            this.$emit('update-data', this.enteredName, this.enteredAge)
         }
     }
 }
