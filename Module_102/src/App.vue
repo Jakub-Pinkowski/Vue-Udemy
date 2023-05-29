@@ -30,11 +30,27 @@ export default {
             activeTopic: null,
         };
     },
+    provide() {
+        return {
+            topics: this.topics,
+        };
+    },
     methods: {
         activateTopic(topicId) {
             this.activeTopic = this.topics.find((topic) => topic.id === topicId);
         },
     },
+    mounted() {
+        setTimeout(() => {
+            this.topics.push({
+                id: 'events',
+                title: 'Events',
+                description: 'Learn how to work with events in Vue',
+                fullText:
+                    'Events are a core concept in Vue - you can listen to them and you can emit them. That\'s all you need to know!',
+            });
+        }, 3000);
+    }
 };
 </script>
 
