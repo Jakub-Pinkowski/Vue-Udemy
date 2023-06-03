@@ -52,6 +52,8 @@ export default {
                 rating: this.chosenRating,
             });
 
+            fetch('https://vue-udemy-course-66b64-default-rtdb.europe-west1.firebasedatabase.app');
+
             this.enteredName = '';
             this.chosenRating = null;
         },
