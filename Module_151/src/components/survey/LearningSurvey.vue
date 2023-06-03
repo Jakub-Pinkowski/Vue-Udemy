@@ -2,7 +2,7 @@
     <section>
         <base-card>
             <h2>How was you learning experience?</h2>
-            <form @submit="submitSurvey">
+            <form @submit.prevent="submitSurvey">
                 <div class="form-control">
                     <label for="name">Your Name</label>
                     <input type="text" id="name" name="name" v-model.trim="enteredName" />
@@ -38,7 +38,6 @@ export default {
             invalidInput: false,
         };
     },
-    emits: ['survey-submit'],
     methods: {
         submitSurvey() {
             if (this.enteredName === '' || !this.chosenRating) {
@@ -47,12 +46,16 @@ export default {
             }
             this.invalidInput = false;
 
-            this.$emit('survey-submit', {
-                userName: this.enteredName,
-                rating: this.chosenRating,
+            fetch('https://vue-udemy-course-66b64-default-rtdb.europe-west1.firebasedatabase.app/surveys.json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.enteredName,
+                    rating: this.chosenRating,
+                }),
             });
-
-            fetch('https://vue-udemy-course-66b64-default-rtdb.europe-west1.firebasedatabase.app');
 
             this.enteredName = '';
             this.chosenRating = null;
