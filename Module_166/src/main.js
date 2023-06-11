@@ -16,6 +16,9 @@ const router = createRouter({
         {
             name: 'teams',
             path: '/teams',
+            meta: {
+                needsAuth: true,
+            },
             components: {
                 default: TeamsList,
                 footer: TeamsFooter,
@@ -39,7 +42,7 @@ const router = createRouter({
                 console.log('users beforeEnter');
                 console.log(to, from);
                 next();
-            }
+            },
         },
         { path: '/:notFound(.*)', component: NotFound },
     ],
@@ -51,13 +54,18 @@ const router = createRouter({
     },
 });
 
-router.beforeEach(function(to, from, next) {
+router.beforeEach(function (to, from, next) {
     console.log('Global beforeEach');
     console.log(to, from);
-    next();
+    if (to.meta.needsAuth) {
+        console.log('Needs auth!');
+        next();
+    } else {
+        next();
+    }
 });
 
-router.afterEach(function(to, from) {
+router.afterEach(function (to, from) {
     console.log('Global afterEach');
     console.log(to, from);
 });

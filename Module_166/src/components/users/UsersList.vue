@@ -28,7 +28,7 @@ export default {
             this.changesSaved = true;
         },
     },
-    beforeRouteLeave (_, _2, next) {
+    beforeRouteLeave(_, _2, next) {
         console.log('beforeRouteLeave');
         if (this.changesSaved) {
             next();
