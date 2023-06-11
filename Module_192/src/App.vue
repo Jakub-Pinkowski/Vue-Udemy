@@ -1,10 +1,10 @@
 <template>
     <div class="container">
-        <div class="block" :class="{animate: animatedBlock}"></div>
+        <div class="block" :class="{ animate: animatedBlock }"></div>
         <button @click="animateBlock">Animate</button>
     </div>
     <div class="container">
-        <transition>
+        <transition name="para">
             <p v-if="paraIsVisible">This is only sometimes visible</p>
         </transition>
         <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -78,7 +78,7 @@ button:active {
     height: 8rem;
     background-color: #290033;
     margin-bottom: 2rem;
-    
+
 }
 
 .container {
@@ -97,13 +97,28 @@ button:active {
     animation: slide-fade 0.3s ease-out forwards;
 }
 
+.para-enter-to {
 
-.v-enter-active {
-    animation: slide-scale 0.3 ease-out;
 }
 
-.v-leave-active {
-    animation: slide-scale 0.3 ease-out;
+.para-enter-active {
+    animation: slide-scale 0.3s ease-out;
+}
+
+.para-enter-to {
+
+}
+
+.para-leave-from {
+
+}
+
+.para-leave-active {
+    animation: slide-scale 0.3s ease-out;
+}
+
+.para-leave-to {
+
 }
 
 
