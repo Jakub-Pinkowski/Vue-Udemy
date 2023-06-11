@@ -17,6 +17,9 @@ export default {
         isAuth() {
             return this.$store.getters.userIsAuthenticated;
         },
+        isTestAuth() {
+            return this.$store.getters.isTestAuth
+        }
     },
 };
 </script>
