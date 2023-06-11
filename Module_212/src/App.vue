@@ -1,5 +1,5 @@
 <template>
-    <base-container title="Vuex" v-if="isAuth">
+    <base-container title="Vuex">
         <the-counter></the-counter>
         <favorite-value></favorite-value>
         <change-counter></change-counter>
