@@ -13,7 +13,7 @@ export default {
                 },
                 {
                     id: 'p2',
-                    image: 'https://en.wikipedia.org/wiki/Tent#/media/File:Tent_at_High_Shelf_Camp_cropped.jpg',
+                    image: 'https://commons.wikimedia.org/wiki/Main_Page#/media/File:CN_8015,_5690_and_5517_Hinton_-_Jasper.jpg',
                     title: 'Mountain Tent',
                     description:
                         'A tent for the ambitious outdoor tourist.',

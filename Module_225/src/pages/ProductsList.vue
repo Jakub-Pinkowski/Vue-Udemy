@@ -9,11 +9,12 @@
 
 <script>
 import ProductItem from '../components/products/ProductItem.vue';
-import { mapGetters } from 'vuex';
 
 export default {
     computed: {
-        ...mapGetters(['products']),
+        products() {
+            return this.$store.getters['prods/products'];
+        },
     },
     components: {
         ProductItem,

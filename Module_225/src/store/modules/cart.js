@@ -46,17 +46,17 @@ export default {
         },
         removeFromCart(context, payload) {
             context.commit('removeProductFromCart', payload);
-        }
+        },
     },
     getters: {
         products(state) {
             return state.items;
         },
         totalSum(state) {
-            return state.total;
+            return state.total.toFixed(2);
         },
         quantity(state) {
             return state.qty;
-        }
-    }
+        },
+    },
 };

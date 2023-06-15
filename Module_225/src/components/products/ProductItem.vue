@@ -28,7 +28,9 @@ export default {
         ...mapGetters(['cart']),
     },
     methods: {
-        ...mapActions(['addToCart']),
+        addToCart() {
+            this.$store.dispatch('card/addToCart');
+        },
     },
 };
 </script>
