@@ -1,62 +1,65 @@
 export default {
-    namespaced: true,
-    state() {
-        return {
-            items: [],
-            total: 0,
-            qty: 0,
-        };
-    },
-    mutations: {
-        addProductToCart(state, payload) {
-            const productData = payload.product;
-            const productInCartIndex = state.items.findIndex(
-                (ci) => ci.productId === payload.id
-            );
+  namespaced: true,
+  state() {
+    return {
+      items: [],
+      total: 0,
+      qty: 0
+    };
+  },
+  mutations: {
+    addProductToCart(state, payload) {
+      const productData = payload;
+      const productInCartIndex = state.items.findIndex(
+        (ci) => ci.productId === productData.id
+      );
 
-            if (productInCartIndex >= 0) {
-                state.items[productInCartIndex].qty++;
-            } else {
-                const newItem = {
-                    productId: payload.id,
-                    title: payload.title,
-                    image: payload.image,
-                    price: payload.price,
-                    qty: 1,
-                };
-                state.items.push(newItem);
-            }
-            state.qty++;
-            state.total += productData.price;
-        },
-        removeProductFromCart(state, payload) {
-            const prodID = payload.productId;
-            const productInCartIndex = state.items.findIndex(
-                (cartItem) => cartItem.productId === prodID
-            );
-            const prodData = state.items[productInCartIndex];
-            state.items.splice(productInCartIndex, 1);
-            state.qty -= prodData.qty;
-            state.total -= prodData.price * prodData.qty;
-        },
+      if (productInCartIndex >= 0) {
+        state.items[productInCartIndex].qty++;
+      } else {
+        const newItem = {
+          productId: productData.id,
+          title: productData.title,
+          image: productData.image,
+          price: productData.price,
+          qty: 1,
+        };
+        state.items.push(newItem);
+      }
+      state.qty++;
+      state.total += productData.price;
     },
-    actions: {
-        addToCart(context, payload) {
-            context.commit('addProductToCart', payload);
-        },
-        removeFromCart(context, payload) {
-            context.commit('removeProductFromCart', payload);
-        },
+    removeProductFromCart(state, payload) {
+      const prodId = payload.productId;
+      const productInCartIndex = state.items.findIndex(
+        (cartItem) => cartItem.productId === prodId
+      );
+      const prodData = state.items[productInCartIndex];
+      state.items.splice(productInCartIndex, 1);
+      state.qty -= prodData.qty;
+      state.total -= prodData.price * prodData.qty;
     },
-    getters: {
-        products(state) {
-            return state.items;
-        },
-        totalSum(state) {
-            return state.total.toFixed(2);
-        },
-        quantity(state) {
-            return state.qty;
-        },
+  },
+  actions: {
+    addToCart(context, payload) {
+      const prodId = payload.id;
+      const products = context.rootGetters['prods/products'];
+      const product = products.find(prod => prod.id === prodId);
+      context.commit('addProductToCart', product);
     },
+    removeFromCart(context, payload) {
+      context.commit('removeProductFromCart', payload);
+    }
+  },
+  getters: {
+    products(state) {
+      return state.items;
+    },
+    totalSum(state) {
+      return state.total;
+    },
+    quantity(state) {
+      return state.qty;
+    }
+  }
 };

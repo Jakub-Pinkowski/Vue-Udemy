@@ -3,39 +3,37 @@ import { createStore } from 'vuex';
 import productsModule from './modules/products.js';
 import cartModule from './modules/cart.js';
 
-export default createStore({
-    modules: {
-        prods: productsModule,
-        cart: cartModule,
+const store = createStore({
+  modules: {
+    prods: productsModule,
+    cart: cartModule
+  },
+  state() {
+    return {
+      isLoggedIn: false
+    };
+  },
+  mutations: {
+    login(state) {
+      state.isLoggedIn = true;
     },
-
-    state() {
-        return {
-            isLoggedIn: false,
-        };
+    logout(state) {
+      state.isLoggedIn = false;
     },
-    mutations: {
-        login(state) {
-            state.isLoggedIn = true;
-        },
-        logout(state) {
-            state.isLoggedIn = false;
-        },
+  },
+  actions: {
+    login(context) {
+      context.commit('login');
     },
-    actions: {
-        login(context) {
-            context.commit('login');
-        },
-        logout(context) {
-            context.commit('logout');
-        },
+    logout(context) {
+      context.commit('logout');
     },
-    getters: {
-        cart(state) {
-            return state.cart;
-        },
-        isLoggedIn(state) {
-            return state.isLoggedIn;
-        },
-    },
+  },
+  getters: {
+    isAuthenticated(state) {
+      return state.isLoggedIn;
+    }
+  }
 });
+
+export default store;
