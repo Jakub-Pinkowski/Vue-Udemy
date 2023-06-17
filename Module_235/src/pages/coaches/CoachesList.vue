@@ -70,7 +70,7 @@ export default {
         loadCoaches() {
             this.$store.dispatch('coaches/loadCoaches');
         },
-        
+
     },
 }
 
