@@ -1,8 +1,5 @@
 <template>
     <section>
-        FILTER
-    </section>
-    <section>
         <base-card>
             <div class="controls">
                 <base-button mode="outline">Refresh</base-button>
