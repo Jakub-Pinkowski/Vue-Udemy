@@ -49,7 +49,7 @@ export default {
         loadRequests() {
             this.isLoading = true;
             try {
-                await this.$store.dispatch('requests/fetchRequests');
+                this.$store.dispatch('requests/fetchRequests');
             } catch (error) {
                 this.error = error.message || 'Failed to fetch requests.';
             }
