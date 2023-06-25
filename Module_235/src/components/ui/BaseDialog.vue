@@ -1,55 +1,57 @@
 <template>
     <teleport to="body">
-      <div v-if="show" @click="tryClose" class="backdrop"></div>
-      <dialog open v-if="show">
-        <header>
-          <slot name="header">
-            <h2>{{ title }}</h2>
-          </slot>
-        </header>
-        <section>
-          <slot></slot>
-        </section>
-        <menu v-if="!fixed">
-          <slot name="actions">
-            <base-button @click="tryClose">Close</base-button>
-          </slot>
-        </menu>
-      </dialog>
+        <div v-if="show" @click="tryClose" class="backdrop"></div>
+        <transition name="dialog">
+            <dialog open v-if="show">
+                <header>
+                    <slot name="header">
+                        <h2>{{ title }}</h2>
+                    </slot>
+                </header>
+                <section>
+                    <slot></slot>
+                </section>
+                <menu v-if="!fixed">
+                    <slot name="actions">
+                        <base-button @click="tryClose">Close</base-button>
+                    </slot>
+                </menu>
+            </dialog>
+        </transition>
     </teleport>
-  </template>
+</template>
   
-  <script>
-  export default {
+<script>
+export default {
     props: {
-      show: {
-        type: Boolean,
-        required: true,
-      },
-      title: {
-        type: String,
-        required: false,
-      },
-      fixed: {
-        type: Boolean,
-        required: false,
-        default: false,
-      },
+        show: {
+            type: Boolean,
+            required: true,
+        },
+        title: {
+            type: String,
+            required: false,
+        },
+        fixed: {
+            type: Boolean,
+            required: false,
+            default: false,
+        },
     },
     emits: ['close'],
     methods: {
-      tryClose() {
-        if (this.fixed) {
-          return;
-        }
-        this.$emit('close');
-      },
+        tryClose() {
+            if (this.fixed) {
+                return;
+            }
+            this.$emit('close');
+        },
     },
-  };
-  </script>
+};
+</script>
   
-  <style scoped>
-  .backdrop {
+<style scoped>
+.backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -57,9 +59,9 @@
     width: 100%;
     background-color: rgba(0, 0, 0, 0.75);
     z-index: 10;
-  }
-  
-  dialog {
+}
+
+dialog {
     position: fixed;
     top: 20vh;
     left: 10%;
@@ -72,34 +74,56 @@
     margin: 0;
     overflow: hidden;
     background-color: white;
-  }
-  
-  header {
+}
+
+header {
     background-color: #3a0061;
     color: white;
     width: 100%;
     padding: 1rem;
-  }
-  
-  header h2 {
+}
+
+header h2 {
     margin: 0;
-  }
-  
-  section {
+}
+
+section {
     padding: 1rem;
-  }
-  
-  menu {
+}
+
+menu {
     padding: 1rem;
     display: flex;
     justify-content: flex-end;
     margin: 0;
-  }
-  
-  @media (min-width: 768px) {
+}
+
+.dialog-enter-from,
+.dialog-leave-to {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.dialog-enter-active {
+    transition: all 0.3s ease-out;
+}
+
+.dialog-leave-active {
+    transition: all 0.3s ease-in;
+}
+
+.dialog-enter-to,
+.dialog-leave-from {
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+
+@media (min-width: 768px) {
     dialog {
-      left: calc(50% - 20rem);
-      width: 40rem;
+        left: calc(50% - 20rem);
+        width: 40rem;
     }
-  }
-  </style>
+}
+</style>
