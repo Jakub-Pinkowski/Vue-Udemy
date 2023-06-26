@@ -16,6 +16,9 @@ export default {
         TheHeader,
         CoachesList,
     },
+    created() {
+        this.$store.dispatch('tryLogin')
+    }
 };
 
 </script>
