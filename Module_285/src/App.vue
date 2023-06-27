@@ -1,24 +1,21 @@
 <template>
     <section class="container">
-        <h2>{{ user.name }}</h2>
-        <h3>{{ user.age }}</h3>
+        <h2>{{ name }}</h2>
+        <h3>{{ age }}</h3>
+        <button @click="setNewAge">Change Age</button>
     </section>
 </template>
 
 <script setup>
-import { ref, reactive, toRefs } from 'vue';
+import { ref, reactive } from 'vue';
 
-const user = reactive({
-    name: 'Jakub',
-    age: 27,
-});
+const age = ref(27);
+const name = ref('Jakub');
 
-const userRefs = toRefs(user);
 
-setTimeout(() => {
-    user.name = 'Rachel';
-    user.age = 25;
-}, 2000);
+function setNewAge() {
+    age.value += 1;
+}
 
 </script>
 
