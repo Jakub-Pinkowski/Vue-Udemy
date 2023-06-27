@@ -6,15 +6,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { reactive } from 'vue';
+import { ref, reactive, toRefs } from 'vue';
 
 const user = reactive({
     name: 'Jakub',
     age: 27,
 });
 
-console.log(user);
+const userRefs = toRefs(user);
 
 setTimeout(() => {
     user.name = 'Rachel';
