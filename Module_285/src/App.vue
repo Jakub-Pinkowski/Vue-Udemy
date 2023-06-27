@@ -21,7 +21,7 @@ const fullName = computed(() => {
     return firstName.value + ' ' + lastName.value;
 })
 
-watch([age, fullName], function(newValue, oldValue) {
+watch([age, fullName], function (newValue, oldValue) {
     console.log('Old age: ' + oldValue[0])
     console.log('New age: ' + newValue[0])
     console.log('Old name: ' + oldValue[1])
