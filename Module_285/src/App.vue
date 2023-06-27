@@ -1,7 +1,6 @@
 <template>
     <section class="container">
-        <h2>{{ fullName }}</h2>
-        <h3>{{ age }}</h3>
+        <user-data :first-name="firstName" :last-name="lastName" :age="age"></user-data>
         <button @click="setNewAge">Change Age</button>
         <div>
             <input type="text" placeholder="First Name" v-model="firstName" />
@@ -13,6 +12,7 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
+import UserData from './components/UserData.vue';
 
 const firstName = ref('');
 const lastName = ref('');
@@ -26,8 +26,6 @@ const fullName = computed(() => {
 watch([age, fullName], function (newValue, oldValue) {
     console.log('Old age: ' + oldValue[0])
     console.log('New age: ' + newValue[0])
-    console.log('Old name: ' + oldValue[1])
-    console.log('New name: ' + newValue[1])
 })
 
 function setNewAge() {
@@ -38,7 +36,12 @@ function setLastName() {
     lastName.value = lastNameInput.value.value;
 }
 
+components: {
+    UserData
+}
+
 </script>
+
 
 <style>
 * {
