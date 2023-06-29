@@ -12,51 +12,49 @@
     </base-container>
 </template>
 
-<script>
+<script setup>
 import ProjectItem from './ProjectItem.vue';
+import { ref, computed, watch } from 'vue';
 
-export default {
-    components: {
-        ProjectItem,
+const props = defineProps({
+    user: {
+        type: Object,
+        required: false,
     },
-    props: ['user'],
-    data() {
-        return {
-            enteredSearchTerm: '',
-            activeSearchTerm: '',
-        };
-    },
-    computed: {
-        hasProjects() {
-            return this.user.projects && this.availableProjects.length > 0;
-        },
-        availableProjects() {
-            if (this.activeSearchTerm) {
-                return this.user.projects.filter((prj) =>
-                    prj.title.includes(this.activeSearchTerm)
-                );
-            }
-            return this.user.projects;
-        },
-    },
-    methods: {
-        updateSearch(val) {
-            this.enteredSearchTerm = val;
-        },
-    },
-    watch: {
-        enteredSearchTerm(val) {
-            setTimeout(() => {
-                if (val === this.enteredSearchTerm) {
-                    this.activeSearchTerm = val;
-                }
-            }, 300);
-        },
-        user() {
-            this.enteredSearchTerm = '';
-        },
-    },
-};
+});
+
+const enteredSearchTerm = ref('');
+const activeSearchTerm = ref('');
+
+const hasProjects = computed(() => {
+    return props.user.projects && availableProjects.value.length > 0;
+});
+
+const availableProjects = computed(() => {
+    if (activeSearchTerm.value) {
+        return props.user.projects.filter((prj) =>
+            prj.title.includes(activeSearchTerm.value)
+        );
+    }
+    return props.user.projects;
+});
+
+function updateSearch(searchTerm) {
+    enteredSearchTerm.value = searchTerm;
+}
+
+watch(enteredSearchTerm, function (newValue) {
+    setTimeout(() => {
+        if (newValue === enteredSearchTerm.value) {
+            activeSearchTerm.value = newValue;
+        }
+    }, 300);
+});
+
+watch(props, function (newValue) {
+    enteredSearchTerm.value = '';
+});
+
 </script>
 
 <style scoped>

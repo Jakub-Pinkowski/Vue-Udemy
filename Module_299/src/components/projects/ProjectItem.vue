@@ -4,10 +4,14 @@
     </li>
 </template>
 
-<script>
-export default {
-    props: ['title'],
-};
+<script setup>
+const props = defineProps({
+    title: {
+        type: String,
+        required: true,
+    },
+});
+
 </script>
 
 <style scoped>
