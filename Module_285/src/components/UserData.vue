@@ -7,19 +7,27 @@
     </h3>
 </template>
 
-<script setup>
+<script>
 import { computed } from 'vue';
 
-const props = defineProps({
-    firstName: String,
-    lastName: String,
-    age: Number
-})
+export default {
+    props: {
+        firstName: String,
+        lastName: String,
+        age: Number
+    },
+    setup(props, context) {
+        const userName = computed(() => {
+            return props.firstName + ' ' + props.lastName;
+        })
 
-const userName = computed(() => {
-    return props.firstName + ' ' + props.lastName;
-})
+        console.log(context)
 
+        return {
+            userName
+        }
+    }
+}
 
 
 </script>
