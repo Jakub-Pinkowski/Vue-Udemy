@@ -7,13 +7,13 @@ import ProductDetails from './pages/ProductDetails.vue';
 import AddProduct from './pages/AddProduct.vue';
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    { path: '/', redirect: '/products' },
-    { path: '/products', component: AllProducts },
-    { path: '/products/:pid', component: ProductDetails },
-    { path: '/products/add', component: AddProduct }
-  ]
+    history: createWebHistory(),
+    routes: [
+        { path: '/', redirect: '/products' },
+        { path: '/products', component: AllProducts },
+        { path: '/products/:pid', component: ProductDetails },
+        { path: '/products/add', component: AddProduct },
+    ],
 });
 
 const app = createApp(App);
